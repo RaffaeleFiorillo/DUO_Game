@@ -49,10 +49,12 @@ class Human_Player(Player):
 
     def pass_or_play(self):
         choice = input("Do you wish to pass the turn to the other player? (y/n): ")
+        next_player = {1: 2, 2: 1}
         if choice.lower() == "y":
-            return 1
-        else:
+            print(f"# -> TURN PASSED TO PLAYER {next_player[self.code]}")
             return 4
+        else:
+            return 1
 
 
 class Computer_Player(Player):
@@ -61,7 +63,11 @@ class Computer_Player(Player):
 
     def pass_or_play(self):
         Df.wait(2)
-        return Df.choice([1, 4])
+        next_player = {1: 2, 2: 1}
+        choice = Df.choice([1, 4])
+        if choice == 4:
+            print(f"# -> TURN PASSED TO PLAYER {next_player[self.code]}")
+        return choice
 
 
 class Mode1:
@@ -130,12 +136,20 @@ class Mode1:
         # self.current_player_is_p1 = not self.current_player_is_p1  # passes the turn to the other player
         self.print_update()
 
+    def print_win(self):
+        print(Df.BLOCK_LINE)
+        print(f"      #####---> Player {self.players[self.current_player_is_p1]} WON!!! <---- #####")
+        self.players[self.current_player_is_p1].print_data()
+        self.players[not self.current_player_is_p1].print_data()
+        print(Df.BLOCK_LINE)
+
     def play(self):
         self.print_update()
         while self.run:
             action_code = self.players[self.current_player_is_p1].launch_cubes()  # makes current player launch
             self.take_action(action_code)
             self.update()
+        self.print_win()
 
 
 class Mode2:
