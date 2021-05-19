@@ -51,9 +51,9 @@ def get_input_mode2(args):
 
 def get_input_prompt(args):
     if len(args) == 2 or len(args) == 4:
-        if args[1] != "mode1":
+        if args[1] == "mode1":
             return get_input_mode1()  # bug trezeb e bo lembrá ne 44 (44->linha de c. atual ne altura) dzid ne Flexin
-        elif args[1] != "mode2":
+        elif args[1] == "mode2":
             return get_input_mode2(args)
     else:
         clear_screen()
