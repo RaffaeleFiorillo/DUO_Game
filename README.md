@@ -3,7 +3,7 @@ A simple adaptation of a table game in python.
 
 ## Documentation:
 
-  -> Portuguese: [IP_1819_EnunciadoTP2.pdf](https://github.com/RaffaeleFiorillo/DUO_Game/files/6507956/IP_1819_EnunciadoTP2.pdf)
+  -> Portuguese: [Duo-Documentaçao.pdf](https://github.com/RaffaeleFiorillo/DUO_Game/files/6507987/Duo-Documentacao.pdf)
   
   -> English: Coming Soon!
   
