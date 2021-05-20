@@ -157,7 +157,7 @@ class Mode1:
 
     def print_win(self):
         print(Df.BLOCK_LINE)
-        print(f"      #####---> Player {self.players[self.current_player_is_p1]} WON!!! <---- #####")
+        print(f"      #####---> Player {self.players[self.current_player_is_p1].name} WON!!! <---- #####")
         self.players[self.current_player_is_p1].print_data()
         self.players[not self.current_player_is_p1].print_data()
         print(Df.BLOCK_LINE)
