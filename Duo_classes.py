@@ -91,6 +91,7 @@ class Mode1:
         self.players[not self.current_player_is_p1].total_points += self.players[self.current_player_is_p1].turn_points
         self.players[self.current_player_is_p1].turn_points = 0  # player loses all points won in this turn
         self.current_player_is_p1 = not self.current_player_is_p1  # pass turn to the other player
+        self.print_update()
 
     def action3(self):
         # pass all points won by current player to the other player
@@ -98,14 +99,17 @@ class Mode1:
         self.players[self.current_player_is_p1].turn_points = 0  # player loses all points won in this turn
         self.players[self.current_player_is_p1].total_points = 0  # player loses all points
         self.current_player_is_p1 = not self.current_player_is_p1  # pass turn to the other player
+        self.print_update()
 
     def action4(self):
         # points won in this turn are added up to the total amount of points
         self.players[self.current_player_is_p1].total_points += self.players[self.current_player_is_p1].turn_points
         self.players[self.current_player_is_p1].turn_points = 0  # points won in this turn are set to 0
         self.current_player_is_p1 = not self.current_player_is_p1  # pass turn to the other player
+        self.print_update()
 
     def action5(self):
+        self.print_update()
         self.run = False
 
     def action6(self):
@@ -123,6 +127,7 @@ class Mode1:
         actions[code]()
 
     def print_update(self):
+        self.turn += 1
         print(Df.TURN_LINE)
         print(f"#################--> UPDATE BLOCK: TURN {self.turn} <--#################\n")
         print("# PLAYING #")
@@ -130,11 +135,6 @@ class Mode1:
         print("# WAITING #")
         self.players[not self.current_player_is_p1].print_data(False)
         print(Df.TURN_LINE)
-
-    def update(self):
-        self.turn += 1
-        # self.current_player_is_p1 = not self.current_player_is_p1  # passes the turn to the other player
-        self.print_update()
 
     def print_win(self):
         print(Df.BLOCK_LINE)
@@ -148,7 +148,6 @@ class Mode1:
         while self.run:
             action_code = self.players[self.current_player_is_p1].launch_cubes()  # makes current player launch
             self.take_action(action_code)
-            self.update()
         self.print_win()
 
 
