@@ -20,7 +20,18 @@ class Player:
         if inside_turn:
             print(Df.TURN_LINE)
 
+    def player_launch_input(self):
+        pass
+
+    def winning_condition_satisfied(self):
+        if self.total_points >= 50:
+            return True
+        return False
+
     def launch_cubes(self):
+        if self.winning_condition_satisfied():
+            return 5
+        self.player_launch_input()
         self.launches += 1
         # code 1->play again; code 2->[1, x]; code 3->[1, 1]; code 4->pass turn; code 5->win; code 6->max launches
         self.launch = [Df.randint(1, 6) for _ in range(2)]
@@ -32,7 +43,7 @@ class Player:
             return 2
         elif self.turn_points >= 20:
             return 4
-        elif self.total_points >= 50:
+        elif self.winning_condition_satisfied():
             return 5
         elif self.launches == 100:
             return 6
@@ -47,26 +58,34 @@ class Human_Player(Player):
     def __init__(self, name, code):
         super().__init__(name, code)
 
+    def player_launch_input(self):
+        input("           PRESS ENTER TO LAUNCH THE CUBES")
+
     def pass_or_play(self):
         choice = input("Do you wish to pass the turn to the other player? (y/n): ")
         next_player = {1: 2, 2: 1}
         if choice.lower() == "y":
             print(f"# -> TURN PASSED TO PLAYER {next_player[self.code]}")
             return 4
-        else:
-            return 1
+        return 1
 
 
 class Computer_Player(Player):
     def __init__(self, name, code):
         super().__init__(name, code)
 
+    def player_launch_input(self):
+        Df.wait(1)
+        print(f"                      ### {self.name} LAUNCHED THE CUBES ###")
+
     def pass_or_play(self):
         Df.wait(2)
         next_player = {1: 2, 2: 1}
         choice = Df.choice([1, 4])
         if choice == 4:
-            print(f"# -> TURN PASSED TO PLAYER {next_player[self.code]}")
+            print(f"                  # -> TURN PASSED TO PLAYER {next_player[self.code]}")
+        else:
+            print(f"                  # -> {self.name} DECIDED TO KEEP HIS TURN <- #")
         return choice
 
 
